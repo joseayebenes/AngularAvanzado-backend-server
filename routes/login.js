@@ -53,11 +53,14 @@ app.post("/google",async (req, res) => {
     }
     
     if(usuarioDb){
-      if(usuarioDb.google === false){
+
+      if (usuarioDb.google === false){
+
         return res.status(400).json({
           ok: false,
           mensaje: "No se puede autenticar con google"
         });
+
       }else{
         // CREAR UN TOKEN
           usuarioDb.password = ':)';
@@ -75,14 +78,13 @@ app.post("/google",async (req, res) => {
     }else{
 
       var usuario = new Usuario();
-      usuario.nombre = google.nombre;
+      usuario.nombre = googleUser.nombre;
       usuario.email = googleUser.email;
       usuario.img = googleUser.img;
       usuario.google = true;
       usuario.password= ':)';
 
       usuario.save((err, usuarioDb)=>{
-
 
         // CREAR UN TOKEN
           usuarioDb.password = ':)';
@@ -100,13 +102,6 @@ app.post("/google",async (req, res) => {
       });
     }
   });
-
-  return res.status(200).json({
-    ok: true,
-    mensaje: "OK!",
-    googleUser: googleUser
-  });
-
 
 });
 

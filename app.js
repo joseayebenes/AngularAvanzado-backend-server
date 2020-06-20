@@ -7,6 +7,14 @@ var bodyParse = require('body-parser');
 // Inicializar variables
 var app = express();
 
+//CORS
+app.use(function(req,res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Acess-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+    next();
+});
+
 // Importar rutas
 var appRoutes = require('./routes/app');
 var usuarioRoutes = require("./routes/usuario");
@@ -16,6 +24,7 @@ var medicosRoutes = require("./routes/medico");
 var busquedaRoutes = require("./routes/busqueda");
 var uploadRoutes = require("./routes/upload");
 var imagesRoutes = require("./routes/imagenes");
+
 // parse
 app.use(bodyParse.urlencoded({extended: false}));
 app.use(bodyParse.json());
