@@ -88,10 +88,16 @@ function subirPorTipo(tipo, id, nombreArchivo, res){
                   },
                 });
             }
+            
             var pathViejo = './uploads/usuarios/'+usuario.img;
-
             if(fs.existsSync(pathViejo)){
-                fs.unlink(pathViejo);
+              fs.unlink(pathViejo, (err) => {
+                if (err) {
+                  console.log("failed to delete local image:" + err);
+                } else {
+                  console.log('successfully deleted local image');
+                }
+              });
             }
 
             usuario.img = nombreArchivo;
@@ -135,6 +141,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res){
           });
         });
         });
+        
     }
 
     if(tipo == 'hospitales'){
